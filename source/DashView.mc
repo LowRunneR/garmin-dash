@@ -75,6 +75,7 @@ class DashView extends WatchUi.DataField {
     private var mHrZoneBoundaries = null;
     private var mPowerZoneBoundaries = null;
     private var ftp = null;
+    private var showAverageSpeedIndicator = null;
     private static var ZONE_COLORS = [
         0x4da6ff, // Z1 - blue
         0x33cc33, // Z2 - green
@@ -133,6 +134,20 @@ class DashView extends WatchUi.DataField {
                 ftp * 999,
             ];
         }
+
+        if (Application has :Properties) {
+            try {
+                showAverageSpeedIndicator = Application.Properties.getValue("visualizeAvgSpeed");
+                } catch(ex) {
+                    // Fallback default value if the property hasn't been initialized yet
+                    showAverageSpeedIndicator = false;
+                }
+        } else {
+            // Legacy fallback for very old Garmin Edge devices running Connect IQ 1.x/2.x
+            showAverageSpeedIndicator = Application.getApp().getProperty("visualizeAvgSpeed");
+        }
+
+       
     }
 
     // Returns the zone color for value given a 6-entry boundary array
@@ -808,7 +823,7 @@ class DashView extends WatchUi.DataField {
         }
 
         // --- 4. STEP THREE: DRAW THE AVERAGE SPEED INDICATOR ---
-        if (mAvgSpeed > 0.0) {
+        if (mAvgSpeed > 0.0 and showAverageSpeedIndicator) {
             var avgAngleDeg = gaugeStart - (avgRatio * gaugeSweep);
             dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_TRANSPARENT);
             dc.setPenWidth(layout[:trackWidth] + 4); 
@@ -1368,7 +1383,7 @@ class DashView extends WatchUi.DataField {
         }
 
         // --- 4. STEP THREE: DRAW THE AVERAGE SPEED INDICATOR ---
-        if (mAvgSpeed > 0.0) {
+        if (mAvgSpeed > 0.0 and showAverageSpeedIndicator) {
             var avgAngleDeg = gaugeStart - (avgRatio * gaugeSweep);
             dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_TRANSPARENT);
             dc.setPenWidth(layout[:trackWidth] + 4); 
