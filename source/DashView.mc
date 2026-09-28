@@ -71,13 +71,15 @@ class DashView extends WatchUi.DataField {
     private const COLOR_CADENCE = 0xff8800;
     private const COLOR_AVG_INDICATOR = Graphics.COLOR_ORANGE;
     private const COLOR_MAX_INDICATOR = Graphics.COLOR_GREEN;
+    private const COLOR_AVG_INDICATOR = Graphics.COLOR_ORANGE;
+    private const COLOR_MAX_INDICATOR = Graphics.COLOR_GREEN;
 
     // Zone boundaries for arc coloring, set once in initialize().
     // HR zones come from the user's Garmin profile; power zones are derived from the FTP app setting.
     private var mHrZoneBoundaries = null;
     private var mPowerZoneBoundaries = null;
     private var ftp = null;
-    private var showAverageSpeedIndicator = null;
+    private var showSpeedIndicators = null;
     private static var ZONE_COLORS = [
         0x4da6ff, // Z1 - blue
         0x33cc33, // Z2 - green
@@ -139,14 +141,14 @@ class DashView extends WatchUi.DataField {
 
         if (Application has :Properties) {
             try {
-                showAverageSpeedIndicator = Application.Properties.getValue("visualizeAvgSpeed");
+                showSpeedIndicators = Application.Properties.getValue("visualizeSpeedIndicator");
                 } catch(ex) {
                     // Fallback default value if the property hasn't been initialized yet
-                    showAverageSpeedIndicator = false;
+                    showSpeedIndicators = false;
                 }
         } else {
             // Legacy fallback for very old Garmin Edge devices running Connect IQ 1.x/2.x
-            showAverageSpeedIndicator = Application.getApp().getProperty("visualizeAvgSpeed");
+            showSpeedIndicators = Application.getApp().getProperty("visualizeSpeedIndicator");
         }
 
        
@@ -788,6 +790,10 @@ class DashView extends WatchUi.DataField {
         if (maxRatio > 1.0) { maxRatio = 1.0; }
         if (maxRatio < 0.0) { maxRatio = 0.0; }
 
+        var maxRatio = mMaxSpeed / maxVal;
+        if (maxRatio > 1.0) { maxRatio = 1.0; }
+        if (maxRatio < 0.0) { maxRatio = 0.0; }
+
         dc.setPenWidth(layout[:trackWidth]);
 
         // --- 2. STEP ONE: DRAW THE ENTIRE BACKGROUND TRACK (GREY) ---
@@ -829,8 +835,10 @@ class DashView extends WatchUi.DataField {
         }
 
         // --- 4. STEP THREE: DRAW THE AVERAGE SPEED INDICATOR ---
-        if (mAvgSpeed > 0.0 and showAverageSpeedIndicator) {
+        if (mAvgSpeed > 0.0 and showSpeedIndicators) {
             var avgAngleDeg = gaugeStart - (avgRatio * gaugeSweep);
+            dc.setColor(COLOR_AVG_INDICATOR, Graphics.COLOR_TRANSPARENT);
+            dc.setPenWidth(layout[:trackWidth] + 4);
             dc.setColor(COLOR_AVG_INDICATOR, Graphics.COLOR_TRANSPARENT);
             dc.setPenWidth(layout[:trackWidth] + 4);
             
@@ -845,7 +853,7 @@ class DashView extends WatchUi.DataField {
         }
 
         // --- 5. STEP FOUR: DRAW THE MAX SPEED INDICATOR ---
-        if (mAvgSpeed > 0.0 and showAverageSpeedIndicator) {
+        if (mMaxSpeed > 0.0 and showSpeedIndicators) {
             var maxAngleDeg = gaugeStart - (maxRatio * gaugeSweep);
             dc.setColor(COLOR_MAX_INDICATOR, Graphics.COLOR_TRANSPARENT);
             dc.setPenWidth(layout[:trackWidth] + 4);
@@ -1409,8 +1417,10 @@ class DashView extends WatchUi.DataField {
         }
 
         // --- 4. STEP THREE: DRAW THE AVERAGE SPEED INDICATOR ---
-        if (mAvgSpeed > 0.0 and showAverageSpeedIndicator) {
+        if (mAvgSpeed > 0.0 and showSpeedIndicators) {
             var avgAngleDeg = gaugeStart - (avgRatio * gaugeSweep);
+            dc.setColor(Graphics.COLOR_AVG_INDICATOR, Graphics.COLOR_TRANSPARENT);
+            dc.setPenWidth(layout[:trackWidth] + 4);
             dc.setColor(Graphics.COLOR_AVG_INDICATOR, Graphics.COLOR_TRANSPARENT);
             dc.setPenWidth(layout[:trackWidth] + 4);
             
@@ -1425,7 +1435,7 @@ class DashView extends WatchUi.DataField {
         }
 
         // --- 5. STEP FOUR: DRAW THE MAX SPEED INDICATOR ---
-        if (mAvgSpeed > 0.0 and showAverageSpeedIndicator) {
+        if (mMaxSpeed > 0.0 and showSpeedIndicators) {
             var maxAngleDeg = gaugeStart - (maxRatio * gaugeSweep);
             dc.setColor(COLOR_MAX_INDICATOR, Graphics.COLOR_TRANSPARENT);
             dc.setPenWidth(layout[:trackWidth] + 4);
