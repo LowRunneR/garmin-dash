@@ -69,6 +69,8 @@ class DashView extends WatchUi.DataField {
     private const COLOR_HR = 0xff2200;
     private const COLOR_POWER = 0x9900ff;
     private const COLOR_CADENCE = 0xff8800;
+    private const COLOR_AVG_INDICATOR = Graphics.COLOR_ORANGE;
+    private const COLOR_MAX_INDICATOR = Graphics.COLOR_GREEN;
 
     // Zone boundaries for arc coloring, set once in initialize().
     // HR zones come from the user's Garmin profile; power zones are derived from the FTP app setting.
@@ -782,6 +784,10 @@ class DashView extends WatchUi.DataField {
         if (avgRatio > 1.0) { avgRatio = 1.0; }
         if (avgRatio < 0.0) { avgRatio = 0.0; }
 
+        var maxRatio = mMaxSpeed / maxVal;
+        if (maxRatio > 1.0) { maxRatio = 1.0; }
+        if (maxRatio < 0.0) { maxRatio = 0.0; }
+
         dc.setPenWidth(layout[:trackWidth]);
 
         // --- 2. STEP ONE: DRAW THE ENTIRE BACKGROUND TRACK (GREY) ---
@@ -825,8 +831,8 @@ class DashView extends WatchUi.DataField {
         // --- 4. STEP THREE: DRAW THE AVERAGE SPEED INDICATOR ---
         if (mAvgSpeed > 0.0 and showAverageSpeedIndicator) {
             var avgAngleDeg = gaugeStart - (avgRatio * gaugeSweep);
-            dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_TRANSPARENT);
-            dc.setPenWidth(layout[:trackWidth] + 4); 
+            dc.setColor(COLOR_AVG_INDICATOR, Graphics.COLOR_TRANSPARENT);
+            dc.setPenWidth(layout[:trackWidth] + 4);
             
             dc.drawArc(
                 centerX,
@@ -835,6 +841,22 @@ class DashView extends WatchUi.DataField {
                 Graphics.ARC_CLOCKWISE,
                 avgAngleDeg + 1.0,
                 avgAngleDeg - 1.0
+            );
+        }
+
+        // --- 5. STEP FOUR: DRAW THE MAX SPEED INDICATOR ---
+        if (mAvgSpeed > 0.0 and showAverageSpeedIndicator) {
+            var maxAngleDeg = gaugeStart - (maxRatio * gaugeSweep);
+            dc.setColor(COLOR_MAX_INDICATOR, Graphics.COLOR_TRANSPARENT);
+            dc.setPenWidth(layout[:trackWidth] + 4);
+            
+            dc.drawArc(
+                centerX,
+                centerY,
+                radius,
+                Graphics.ARC_CLOCKWISE,
+                maxAngleDeg + 1.0,
+                maxAngleDeg - 1.0
             );
         }
 
@@ -1342,6 +1364,10 @@ class DashView extends WatchUi.DataField {
         if (avgRatio > 1.0) { avgRatio = 1.0; }
         if (avgRatio < 0.0) { avgRatio = 0.0; }
 
+        var maxRatio = mMaxSpeed / maxVal;
+        if (maxRatio > 1.0) { maxRatio = 1.0; }
+        if (maxRatio < 0.0) { maxRatio = 0.0; }
+
         dc.setPenWidth(layout[:trackWidth]);
 
         // --- 2. STEP ONE: DRAW THE ENTIRE BACKGROUND TRACK (GREY) ---
@@ -1385,8 +1411,8 @@ class DashView extends WatchUi.DataField {
         // --- 4. STEP THREE: DRAW THE AVERAGE SPEED INDICATOR ---
         if (mAvgSpeed > 0.0 and showAverageSpeedIndicator) {
             var avgAngleDeg = gaugeStart - (avgRatio * gaugeSweep);
-            dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_TRANSPARENT);
-            dc.setPenWidth(layout[:trackWidth] + 4); 
+            dc.setColor(Graphics.COLOR_AVG_INDICATOR, Graphics.COLOR_TRANSPARENT);
+            dc.setPenWidth(layout[:trackWidth] + 4);
             
             dc.drawArc(
                 centerX,
@@ -1395,6 +1421,22 @@ class DashView extends WatchUi.DataField {
                 Graphics.ARC_CLOCKWISE,
                 avgAngleDeg + 1.0,
                 avgAngleDeg - 1.0
+            );
+        }
+
+        // --- 5. STEP FOUR: DRAW THE MAX SPEED INDICATOR ---
+        if (mAvgSpeed > 0.0 and showAverageSpeedIndicator) {
+            var maxAngleDeg = gaugeStart - (maxRatio * gaugeSweep);
+            dc.setColor(COLOR_MAX_INDICATOR, Graphics.COLOR_TRANSPARENT);
+            dc.setPenWidth(layout[:trackWidth] + 4);
+            
+            dc.drawArc(
+                centerX,
+                centerY,
+                radius,
+                Graphics.ARC_CLOCKWISE,
+                maxAngleDeg + 1.0,
+                maxAngleDeg - 1.0
             );
         }
 
