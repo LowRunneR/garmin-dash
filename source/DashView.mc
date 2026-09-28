@@ -1411,7 +1411,9 @@ class DashView extends WatchUi.DataField {
         // --- 4. STEP THREE: DRAW THE AVERAGE SPEED INDICATOR ---
         if (mAvgSpeed > 0.0 and showSpeedIndicators) {
             var avgAngleDeg = gaugeStart - (avgRatio * gaugeSweep);
-            dc.setColor(COLOR_AVG_INDICATOR, Graphics.COLOR_TRANSPARENT);
+            dc.setColor(Graphics.COLOR_AVG_INDICATOR, Graphics.COLOR_TRANSPARENT);
+            dc.setPenWidth(layout[:trackWidth] + 4);
+            dc.setColor(Graphics.COLOR_AVG_INDICATOR, Graphics.COLOR_TRANSPARENT);
             dc.setPenWidth(layout[:trackWidth] + 4);
             
             dc.drawArc(
