@@ -70,9 +70,7 @@ class DashView extends WatchUi.DataField {
     private const COLOR_POWER = 0x9900ff;
     private const COLOR_CADENCE = 0xff8800;
     private const COLOR_AVG_INDICATOR = Graphics.COLOR_ORANGE;
-    private const COLOR_MAX_INDICATOR = Graphics.COLOR_GREEN;
     private const COLOR_AVG_INDICATOR = Graphics.COLOR_ORANGE;
-    private const COLOR_MAX_INDICATOR = Graphics.COLOR_GREEN;
 
     // Zone boundaries for arc coloring, set once in initialize().
     // HR zones come from the user's Garmin profile; power zones are derived from the FTP app setting.
@@ -839,8 +837,6 @@ class DashView extends WatchUi.DataField {
             var avgAngleDeg = gaugeStart - (avgRatio * gaugeSweep);
             dc.setColor(COLOR_AVG_INDICATOR, Graphics.COLOR_TRANSPARENT);
             dc.setPenWidth(layout[:trackWidth] + 4);
-            dc.setColor(COLOR_AVG_INDICATOR, Graphics.COLOR_TRANSPARENT);
-            dc.setPenWidth(layout[:trackWidth] + 4);
             
             dc.drawArc(
                 centerX,
@@ -1419,8 +1415,6 @@ class DashView extends WatchUi.DataField {
         // --- 4. STEP THREE: DRAW THE AVERAGE SPEED INDICATOR ---
         if (mAvgSpeed > 0.0 and showSpeedIndicators) {
             var avgAngleDeg = gaugeStart - (avgRatio * gaugeSweep);
-            dc.setColor(Graphics.COLOR_AVG_INDICATOR, Graphics.COLOR_TRANSPARENT);
-            dc.setPenWidth(layout[:trackWidth] + 4);
             dc.setColor(Graphics.COLOR_AVG_INDICATOR, Graphics.COLOR_TRANSPARENT);
             dc.setPenWidth(layout[:trackWidth] + 4);
             
