@@ -839,8 +839,8 @@ class DashView extends WatchUi.DataField {
                 centerY,
                 radius,
                 Graphics.ARC_CLOCKWISE,
-                avgAngleDeg + 1.0,
-                avgAngleDeg - 1.0
+                avgAngleDeg + layout[:speedIndicatorsThickness],
+                avgAngleDeg - layout[:speedIndicatorsThickness]
             );
         }
 
@@ -855,8 +855,8 @@ class DashView extends WatchUi.DataField {
                 centerY,
                 radius,
                 Graphics.ARC_CLOCKWISE,
-                maxAngleDeg + 1.0,
-                maxAngleDeg - 1.0
+                maxAngleDeg + layout[:speedIndicatorsThickness],
+                maxAngleDeg - layout[:speedIndicatorsThickness]
             );
         }
 
@@ -1419,8 +1419,8 @@ class DashView extends WatchUi.DataField {
                 centerY,
                 radius,
                 Graphics.ARC_CLOCKWISE,
-                avgAngleDeg + 1.0,
-                avgAngleDeg - 1.0
+                avgAngleDeg + layout[:speedIndicatorsThickness],
+                avgAngleDeg - layout[:speedIndicatorsThickness]
             );
         }
 
@@ -1435,8 +1435,8 @@ class DashView extends WatchUi.DataField {
                 centerY,
                 radius,
                 Graphics.ARC_CLOCKWISE,
-                maxAngleDeg + 1.0,
-                maxAngleDeg - 1.0
+                maxAngleDeg + layout[:speedIndicatorsThickness],
+                maxAngleDeg - layout[:speedIndicatorsThickness]
             );
         }
 
@@ -1820,6 +1820,7 @@ class DashView extends WatchUi.DataField {
                 :panelValueFont => Graphics.FONT_NUMBER_MILD,
                 :rowValueFont => Graphics.FONT_MEDIUM,
                 :gaugeRadiusFactor => 0.275,
+                :speedIndicatorsThickness => 1.5,       //for each side
                 :bottomLabelOffset => 0,
                 :timeLabelOffset => 0,
                 :cadenceLineYOffset => 22,
@@ -1850,6 +1851,7 @@ class DashView extends WatchUi.DataField {
                 :panelValueFont => Graphics.FONT_NUMBER_HOT,
                 :rowValueFont => Graphics.FONT_LARGE,
                 :gaugeRadiusFactor => 0.33,
+                :speedIndicatorsThickness => 1.5,       //for each side
                 :bottomLabelOffset => 0,
                 :timeLabelOffset => 0,
                 :cadenceLineYOffset => 0,
@@ -1880,6 +1882,7 @@ class DashView extends WatchUi.DataField {
                 :panelValueFont => Graphics.FONT_NUMBER_MEDIUM,
                 :rowValueFont => Graphics.FONT_LARGE,
                 :gaugeRadiusFactor => 0.33,
+                :speedIndicatorsThickness => 1.5,       //for each side
                 :bottomLabelOffset => 0,
                 :timeLabelOffset => 8,
                 :cadenceLineYOffset => -2,
@@ -1928,6 +1931,7 @@ class DashView extends WatchUi.DataField {
                 :crownYOffset => 6,
                 :unitLabelFont => Graphics.FONT_TINY,
                 :gaugeRadiusFactor => 0.40,
+                :speedIndicatorsThickness => 1.5,       //for each side
                 :speedYOffset => 0,
             };
         }
@@ -1963,6 +1967,7 @@ class DashView extends WatchUi.DataField {
                 :crownYOffset => 0,
                 :unitLabelFont => Graphics.FONT_TINY,
                 :gaugeRadiusFactor => 0.40,
+                :speedIndicatorsThickness => 1.5,       //for each side
                 :speedYOffset => 0,
             };
         }
@@ -1978,6 +1983,7 @@ class DashView extends WatchUi.DataField {
                 :panelValueFont => Graphics.FONT_NUMBER_MEDIUM,
                 :rowValueFont => Graphics.FONT_LARGE,
                 :gaugeRadiusFactor => 0.33,
+                :speedIndicatorsThickness => 1.5,       //for each side
                 :bottomLabelOffset => 2,
                 :timeLabelOffset => 8,
                 :cadenceLineYOffset => 0,
@@ -2007,6 +2013,7 @@ class DashView extends WatchUi.DataField {
             :panelValueFont => Graphics.FONT_NUMBER_MEDIUM,
             :rowValueFont => Graphics.FONT_LARGE,
             :gaugeRadiusFactor => 0.33,
+            :speedIndicatorsThickness => 1.5,       //for each side
             :bottomLabelOffset => 0,
             :timeLabelOffset => 0,
             :cadenceLineYOffset => 0,
