@@ -69,8 +69,8 @@ class DashView extends WatchUi.DataField {
     private const COLOR_HR = 0xff2200;
     private const COLOR_POWER = 0x9900ff;
     private const COLOR_CADENCE = 0xff8800;
-    private const COLOR_AVG_INDICATOR = Graphics.COLOR_ORANGE;
-    private const COLOR_MAX_INDICATOR = Graphics.COLOR_GREEN;
+    private const COLOR_AVG_INDICATOR = 0xff8800;   //orange
+    private const COLOR_MAX_INDICATOR = 0x00aa00;   //green
 
     // Zone boundaries for arc coloring, set once in initialize().
     // HR zones come from the user's Garmin profile; power zones are derived from the FTP app setting.
@@ -839,8 +839,8 @@ class DashView extends WatchUi.DataField {
                 centerY,
                 radius,
                 Graphics.ARC_CLOCKWISE,
-                avgAngleDeg + layout[:speedIndicatorsThickness],
-                avgAngleDeg - layout[:speedIndicatorsThickness]
+                avgAngleDeg + 2,
+                avgAngleDeg - 2
             );
         }
 
@@ -855,8 +855,8 @@ class DashView extends WatchUi.DataField {
                 centerY,
                 radius,
                 Graphics.ARC_CLOCKWISE,
-                maxAngleDeg + layout[:speedIndicatorsThickness],
-                maxAngleDeg - layout[:speedIndicatorsThickness]
+                maxAngleDeg + 2,
+                maxAngleDeg - 2
             );
         }
 
@@ -1419,8 +1419,8 @@ class DashView extends WatchUi.DataField {
                 centerY,
                 radius,
                 Graphics.ARC_CLOCKWISE,
-                avgAngleDeg + layout[:speedIndicatorsThickness],
-                avgAngleDeg - layout[:speedIndicatorsThickness]
+                avgAngleDeg + 2,
+                avgAngleDeg - 2
             );
         }
 
@@ -1435,8 +1435,8 @@ class DashView extends WatchUi.DataField {
                 centerY,
                 radius,
                 Graphics.ARC_CLOCKWISE,
-                maxAngleDeg + layout[:speedIndicatorsThickness],
-                maxAngleDeg - layout[:speedIndicatorsThickness]
+                maxAngleDeg + 2,
+                maxAngleDeg - 2
             );
         }
 
@@ -1820,7 +1820,6 @@ class DashView extends WatchUi.DataField {
                 :panelValueFont => Graphics.FONT_NUMBER_MILD,
                 :rowValueFont => Graphics.FONT_MEDIUM,
                 :gaugeRadiusFactor => 0.275,
-                :speedIndicatorsThickness => 1.5,       //for each side
                 :bottomLabelOffset => 0,
                 :timeLabelOffset => 0,
                 :cadenceLineYOffset => 22,
@@ -1851,7 +1850,6 @@ class DashView extends WatchUi.DataField {
                 :panelValueFont => Graphics.FONT_NUMBER_HOT,
                 :rowValueFont => Graphics.FONT_LARGE,
                 :gaugeRadiusFactor => 0.33,
-                :speedIndicatorsThickness => 1.5,       //for each side
                 :bottomLabelOffset => 0,
                 :timeLabelOffset => 0,
                 :cadenceLineYOffset => 0,
@@ -1882,7 +1880,6 @@ class DashView extends WatchUi.DataField {
                 :panelValueFont => Graphics.FONT_NUMBER_MEDIUM,
                 :rowValueFont => Graphics.FONT_LARGE,
                 :gaugeRadiusFactor => 0.33,
-                :speedIndicatorsThickness => 1.5,       //for each side
                 :bottomLabelOffset => 0,
                 :timeLabelOffset => 8,
                 :cadenceLineYOffset => -2,
@@ -1931,7 +1928,6 @@ class DashView extends WatchUi.DataField {
                 :crownYOffset => 6,
                 :unitLabelFont => Graphics.FONT_TINY,
                 :gaugeRadiusFactor => 0.40,
-                :speedIndicatorsThickness => 1.5,       //for each side
                 :speedYOffset => 0,
             };
         }
@@ -1967,7 +1963,6 @@ class DashView extends WatchUi.DataField {
                 :crownYOffset => 0,
                 :unitLabelFont => Graphics.FONT_TINY,
                 :gaugeRadiusFactor => 0.40,
-                :speedIndicatorsThickness => 1.5,       //for each side
                 :speedYOffset => 0,
             };
         }
@@ -1983,7 +1978,6 @@ class DashView extends WatchUi.DataField {
                 :panelValueFont => Graphics.FONT_NUMBER_MEDIUM,
                 :rowValueFont => Graphics.FONT_LARGE,
                 :gaugeRadiusFactor => 0.33,
-                :speedIndicatorsThickness => 1.5,       //for each side
                 :bottomLabelOffset => 2,
                 :timeLabelOffset => 8,
                 :cadenceLineYOffset => 0,
@@ -2013,7 +2007,6 @@ class DashView extends WatchUi.DataField {
             :panelValueFont => Graphics.FONT_NUMBER_MEDIUM,
             :rowValueFont => Graphics.FONT_LARGE,
             :gaugeRadiusFactor => 0.33,
-            :speedIndicatorsThickness => 1.5,       //for each side
             :bottomLabelOffset => 0,
             :timeLabelOffset => 0,
             :cadenceLineYOffset => 0,
